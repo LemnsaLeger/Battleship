@@ -1,6 +1,24 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
+#setup-container {
+  margin-bottom: 20px;
+}
+
+#ship-placement {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+#ship-placement label {
+  font-weight: bold;
+}
+
+#ship-placement input,
+#ship-placement select,
+#ship-placement button {
+  padding: 5px;
+  font-size: 16px;
 }
 
 #game-container {
@@ -9,7 +27,8 @@ body {
   margin-top: 20px;
 }
 
-#player-board, #computer-board {
+#player-board,
+#computer-board {
   display: grid;
   grid-template-columns: repeat(10, 30px);
   grid-template-rows: repeat(10, 30px);
@@ -36,5 +55,5 @@ body {
 }
 
 .cell.sunk {
-  background-color: red; 
+  background-color: red;
 }
