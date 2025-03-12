@@ -77,3 +77,68 @@ computerBoardContainer.addEventListener("click", (event) => {
     renderGameboard(computer.gameboard, computerBoardContainer);
   }
 });
+
+
+// Get UI elements
+const shipLengthInput = document.getElementById("ship-length");
+const xCoordInput = document.getElementById("x-coord");
+const yCoordInput = document.getElementById("y-coord");
+const orientationInput = document.getElementById("orientation");
+const placeShipButton = document.getElementById("place-ship");
+const randomPlaceButton = document.getElementById("random-place");
+
+// reset gameboards 
+function resetGameBoards() {
+  player.gameboard = new Gameboard();
+  computer.gameboard = new Gameboard();
+  renderGameboard(player.gameboard, playerBoardContainer);
+  renderGameboard(computer.gameboard, computerBoardContainer);
+}
+
+
+// place ship manually
+placeShipButton.addEventListener("click", () => {
+  const length = parseInt(shipLengthInput.value);
+  const x = parseInt(xCoordInput.value);
+  const y = parseInt(yCoordInput.value);
+  const orientation = orientationInput.value;
+
+  if(isNaN(x) || isNaN(y)) {
+    alert("Please enter valid coordinates");
+    return;
+  }
+
+  // reset gameboard for first placement
+  if(player.gameboard.ships.length === 0) {
+    resetGameBoards();
+  }
+
+  const ship = new Ship(length);
+  try {
+    // place player's ship
+    player.gameboard.placeShip(ship, [x, y], orientation);
+
+    // place the comp's ship of the same length randomly
+    let placed = false;
+    while(!placed) {
+      const comX = Math.floor(Math.random() * 10);
+      const comY = Math.floor(Math.random() * 10);
+      // const compOrientation = Math.random() < 0.5 ? "horizontal" : "vertical";
+      const compOrientation = orientation; // but should have a random coord
+
+      try {
+        const compShip = new Ship(length);
+        computer.gameboard.placeShip(compShip, [comX, comY], compOrientation);
+        placed = true;
+      } catch (err){
+        console.log(err);
+      }
+    }
+
+    // re-render both gameboards
+    renderGameboard(player.gameboard, playerBoardContainer);
+    renderGameboard(computer.gameboard, computerBoardContainer);
+  } catch(err) {
+    alert(err.message);
+  }
+});
