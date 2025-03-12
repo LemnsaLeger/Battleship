@@ -139,6 +139,56 @@ placeShipButton.addEventListener("click", () => {
     renderGameboard(player.gameboard, playerBoardContainer);
     renderGameboard(computer.gameboard, computerBoardContainer);
   } catch(err) {
-    alert(err.message);
+    //alert(err.message);
   }
 });
+
+
+// Place ships randomly 
+randomPlaceButton.addEventListener("click", () => {
+  const shipLengths = [1, 2, 3, 4, 5];
+
+  resetGameBoards();
+
+  // let's start with player
+  shipLengths.forEach((length) => {
+    let placed = false;
+
+    while (!placed) {
+      const x = Math.floor(Math.random() * 10);
+      const y = Math.floor(Math.random() * 10);
+      const orientation = Math.random() < 0.5 ? "horizontal" : "vertical";
+
+      try {
+        const ship = new Ship(length);
+        player.gameboard.placeShip(ship, [x, y], orientation);
+        placed = true;
+      } catch (err) {
+        //alert(err.message);
+      }
+    }
+  });
+
+    shipLengths.forEach((length) => {
+      let placed = false;
+
+      while (!placed) {
+        const x = Math.floor(Math.random() * 10);
+        const y = Math.floor(Math.random() * 10);
+        const orientation = Math.random() < 0.5 ? "horizontal" : "vertical";
+
+        try {
+          const ship = new Ship(length);
+          computer.gameboard.placeShip(ship, [x, y], orientation);
+          placed = true;
+        } catch (err) {
+          //alert(err.message);
+        }
+      }
+    });
+
+    // re-render both gameboards
+    renderGameboard(player.gameboard, playerBoardContainer);
+    renderGameboard(computer.gameboard, computerBoardContainer);
+});
+
