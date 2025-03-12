@@ -192,3 +192,18 @@ randomPlaceButton.addEventListener("click", () => {
     renderGameboard(computer.gameboard, computerBoardContainer);
 });
 
+// start game
+const startGameButton = document.getElementById("start-game");
+
+startGameButton.addEventListener("click", () => {
+  if (player.gameboard.ships.length === 0) {
+    alert("Please place your ships first.");
+    return;
+  }
+
+  // Hide the setup UI
+  document.getElementById("setup-container").style.display = "none";
+
+  // Show the game container
+  document.getElementById("game-container").style.display = "flex";
+});
