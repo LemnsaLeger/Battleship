@@ -8,12 +8,35 @@
 </head>
 <body>
   <h1>Battleship</h1>
-  <div id="game-container">
-    <p>Player </p>
-    <div id="player-board"></div>
+  <section id="setup-container">
+    <h2>Place Your Ships</h2>
+    <section id="ship-placement">
+      <label for="ship-length">Ship Length:</label>
+      <select id="ship-length">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <label for="x-coord">X Coordinate:</label>
+      <input type="number" id="x-coord" min="0" max="9" placeholder="X">
+      <label for="y-coord">Y Coordinate:</label>
+      <input type="number" id="y-coord" min="0" max="9" placeholder="Y">
+      <label for="orientation">Orientation:</label>
+      <select id="orientation">
+        <option value="horizontal">Horizontal</option>
+        <option value="vertical">Vertical</option>
+      </select>
+      <button id="place-ship">Place Ship</button>
+      <button id="random-place">Place Ships Randomly</button>
+    </section>
+  </section>
+  <section id="game-container">
+    <p>Player</p>
+    <p id="player-board"></p>
     <p>Computer</p>
-    <div id="computer-board"></div>
-  </div>
+    <p id="computer-board"></p>
+  </section>
   <script type="module" src="src/game.js"></script>
 </body>
 </html>
