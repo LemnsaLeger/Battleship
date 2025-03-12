@@ -1,6 +1,6 @@
-const Ship = require("../src/Ship");
+import { Ship } from "./Ship.js";
 
-class Gameboard {
+export class Gameboard {
   constructor() {
     this.board = Array(100).fill(null); // 10x10 grid represented as a flat array
     this.missedShots = [];
@@ -48,4 +48,3 @@ class Gameboard {
   }
 }
 
-module.exports = Gameboard;
